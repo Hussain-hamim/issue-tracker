@@ -1,8 +1,11 @@
 'use client';
-import { Button, TextArea, TextField } from '@radix-ui/themes';
+import { Button, TextField } from '@radix-ui/themes';
 import React from 'react';
 import { BiSearch } from 'react-icons/bi';
-import SimpleMDE from 'react-simplemde-editor';
+import dynamic from 'next/dynamic';
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
+  ssr: false,
+});
 import 'easymde/dist/easymde.min.css';
 
 const NewIssuePage = () => {

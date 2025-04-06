@@ -1,5 +1,5 @@
 import { prisma } from '@/prisma/client';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import z from 'zod';
 
 const issueSchema = z.object({
@@ -7,7 +7,7 @@ const issueSchema = z.object({
   description: z.string().min(1),
 });
 
-export async function POST(request: NextResponse) {
+export async function POST(request: NextRequest) {
   const body = await request.json();
   const validation = issueSchema.safeParse(body);
 

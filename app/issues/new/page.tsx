@@ -2,6 +2,8 @@
 import { Button, TextArea, TextField } from '@radix-ui/themes';
 import React from 'react';
 import { BiSearch } from 'react-icons/bi';
+import SimpleMDE from 'react-simplemde-editor';
+import 'easymde/dist/easymde.min.css';
 
 const NewIssuePage = () => {
   return (
@@ -11,7 +13,7 @@ const NewIssuePage = () => {
           <BiSearch size={20} />
         </TextField.Slot>
       </TextField.Root>
-      <TextArea placeholder='Description' />
+      <SimpleMDE className='' placeholder='Description' />
       <Button>Submit New Issue</Button>
     </div>
   );

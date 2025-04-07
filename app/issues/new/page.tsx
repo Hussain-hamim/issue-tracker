@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import dynamic from 'next/dynamic';
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
-  ssr: false,
-}); // dynamic import to avoid error
+  ssr: false, // tell nextjs not to render this on the server
+}); // dynamic import to avoid error: navigator not defined
 import 'easymde/dist/easymde.min.css';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';

@@ -1,5 +1,5 @@
 'use client';
-import { Button, Callout, Text, TextField } from '@radix-ui/themes';
+import { Button, Callout, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import dynamic from 'next/dynamic';
@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { issueSchema } from '@/app/issueSchema';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import ErrorMessage from '@/app/components/ErrorMessage';
 
 type IssueForm = z.infer<typeof issueSchema>;
 
@@ -32,7 +33,7 @@ const NewIssuePage = () => {
   return (
     <div className='max-w-xl'>
       {error && (
-        <Callout.Root color='tomato' className='mb-5'>
+        <Callout.Root color='red' className='mb-5'>
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
@@ -53,11 +54,7 @@ const NewIssuePage = () => {
             <BiSearch size={20} />
           </TextField.Slot>
         </TextField.Root>
-        {errors && (
-          <Text as='p' color='tomato'>
-            {errors.title?.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <Controller
           name='description'
           control={control}
@@ -65,11 +62,7 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder='Description' {...field} />
           )}
         />
-        {errors.description && (
-          <Text as='p' color='tomato'>
-            {errors.description.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
         <Button type='submit'>Submit New Issue</Button>
       </form>

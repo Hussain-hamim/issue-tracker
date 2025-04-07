@@ -5,7 +5,7 @@ import { BiSearch } from 'react-icons/bi';
 import dynamic from 'next/dynamic';
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
-});
+}); // dynamic import to avoid error
 import 'easymde/dist/easymde.min.css';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
@@ -14,6 +14,7 @@ import { issueSchema } from '@/app/issueSchema';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ErrorMessage from '@/app/components/ErrorMessage';
+import Spinner from '@/app/components/Spinner';
 
 type IssueForm = z.infer<typeof issueSchema>;
 
@@ -29,6 +30,7 @@ const NewIssuePage = () => {
 
   const router = useRouter();
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <div className='max-w-xl'>
@@ -41,10 +43,12 @@ const NewIssuePage = () => {
         className=' space-y-3'
         onSubmit={handleSubmit(async (data) => {
           try {
+            setIsSubmitting(true);
             await axios.post('/api/issues', data);
             router.push('/issues');
           } catch (error) {
             console.log(error);
+            setIsSubmitting(false);
             setError('an unexpected error occurred.');
           }
         })}
@@ -64,7 +68,9 @@ const NewIssuePage = () => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button type='submit'>Submit New Issue</Button>
+        <Button disabled={isSubmitting} type='submit'>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );

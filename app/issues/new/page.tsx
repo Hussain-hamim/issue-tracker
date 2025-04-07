@@ -7,18 +7,41 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
 });
 import 'easymde/dist/easymde.min.css';
+import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+
+interface IssueForm {
+  title: string;
+  description: string;
+}
 
 const NewIssuePage = () => {
+  const { register, control, handleSubmit } = useForm<IssueForm>();
+  const router = useRouter();
+
   return (
-    <div className='max-w-xl space-y-3'>
-      <TextField.Root placeholder='Title'>
+    <form
+      className='max-w-xl space-y-3'
+      onSubmit={handleSubmit(async (data) => {
+        await axios.post('/api/issues', data);
+        router.push('/issues');
+      })}
+    >
+      <TextField.Root placeholder='Title' {...register('title')}>
         <TextField.Slot>
           <BiSearch size={20} />
         </TextField.Slot>
       </TextField.Root>
-      <SimpleMDE className='' placeholder='Description' />
-      <Button>Submit New Issue</Button>
-    </div>
+      <Controller
+        name='description'
+        control={control}
+        render={({ field }) => (
+          <SimpleMDE placeholder='Description' {...field} />
+        )}
+      />
+      <Button type='submit'>Submit New Issue</Button>
+    </form>
   );
 };
 

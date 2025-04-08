@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.variable} antialiased`}>
-        <Theme appearance='light' accentColor='plum' radius='full'>
+        <Theme appearance='dark' accentColor='plum' radius='full'>
           <nav>
             <NavBar />
           </nav>

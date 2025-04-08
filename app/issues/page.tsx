@@ -6,7 +6,7 @@ import { IssueStatusBadge, Link } from '@/app/components';
 
 export default async function IssuePage() {
   const issues = await prisma.issue.findMany();
-  await delay(2000);
+  // await delay(2000);
 
   return (
     <div>

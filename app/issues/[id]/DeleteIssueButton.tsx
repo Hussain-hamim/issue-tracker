@@ -7,6 +7,8 @@ import { useState } from 'react';
 
 const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
   const router = useRouter();
+  const [error, setError] = useState(false);
+  const [isDeleting, setDeleting] = useState(false);
 
   const deleteIssue = async () => {
     try {
@@ -16,7 +18,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
     } catch (error) {
       console.log(error);
       //   setDeleting(false);
-      //   setError(true);
+      setError(true);
     }
   };
 
@@ -49,9 +51,10 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
           </Flex>
         </AlertDialog.Content>
       </AlertDialog.Root>
-      <AlertDialog.Root>
+
+      <AlertDialog.Root open={error}>
         <AlertDialog.Content>
-          <AlertDialog.Title>Error</AlertDialog.Title>
+          <AlertDialog.Title color='tomato'>Error</AlertDialog.Title>
           <AlertDialog.Description>
             This issue could not be deleted.
           </AlertDialog.Description>
@@ -59,7 +62,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
             color='gray'
             variant='soft'
             mt='2'
-            // onClick={() => setError(false)}
+            onClick={() => setError(false)}
           >
             OK
           </Button>

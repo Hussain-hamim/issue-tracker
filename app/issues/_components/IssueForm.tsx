@@ -37,8 +37,10 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     try {
       setIsSubmitting(true);
       if (issue) await axios.patch('/api/issues/' + issue.id, data);
-      else await axios.post('/api/issues', data);
+      // for updating the issue
+      else await axios.post('/api/issues', data); // for creating new
       router.push('/issues');
+      router.refresh();
     } catch (error) {
       console.log(error);
       setIsSubmitting(false);

@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import NavBar from './NavBar';
 import { Container, Theme } from '@radix-ui/themes';
+import AuthProvider from './auth/Provider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -24,14 +25,16 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.variable} antialiased`}>
-        <Theme appearance='dark' accentColor='plum' radius='full'>
-          <nav>
-            <NavBar />
-          </nav>
-          <main className='p-5'>
-            <Container>{children}</Container>
-          </main>
-        </Theme>
+        <AuthProvider>
+          <Theme appearance='light' accentColor='plum' radius='full'>
+            <nav>
+              <NavBar />
+            </nav>
+            <main className='p-5'>
+              <Container>{children}</Container>
+            </main>
+          </Theme>
+        </AuthProvider>
       </body>
     </html>
   );

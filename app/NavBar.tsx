@@ -16,6 +16,7 @@ import {
 } from '@radix-ui/themes';
 import { BiLogIn, BiLogOut, BiUser } from 'react-icons/bi';
 import { MoonIcon } from '@radix-ui/react-icons';
+import { Skeleton } from '@/app/components';
 
 const NavBar = () => {
   return (
@@ -65,7 +66,7 @@ const NavLinks = () => {
 const AuthStatus = () => {
   const { status, data: session } = useSession();
 
-  if (status === 'loading') return null;
+  if (status === 'loading') return <Skeleton />;
 
   if (status === 'unauthenticated')
     return (
@@ -103,7 +104,7 @@ const AuthStatus = () => {
           </DropdownMenu.Item>
           <DropdownMenu.Item>
             <AiFillSetting size={18} />
-            <Link href='/api/auth/settings'>Settings</Link>
+            <Link href='/'>Settings</Link>
           </DropdownMenu.Item>
           <DropdownMenu.Item>
             <MoonIcon />

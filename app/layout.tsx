@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${inter.variable} antialiased`}>
         <AuthProvider>
-          <Theme appearance='light' accentColor='plum' radius='full'>
+          <Theme appearance='dark' accentColor='plum' radius='full'>
             <nav>
               <NavBar />
             </nav>

@@ -5,6 +5,7 @@ import './globals.css';
 import NavBar from './NavBar';
 import { Container, Theme } from '@radix-ui/themes';
 import AuthProvider from './auth/Provider';
+import QueryClientProvider from './QueryClientProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,16 +26,18 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.variable} antialiased`}>
-        <AuthProvider>
-          <Theme appearance='dark' accentColor='plum' radius='full'>
-            <nav>
-              <NavBar />
-            </nav>
-            <main className='p-5'>
-              <Container>{children}</Container>
-            </main>
-          </Theme>
-        </AuthProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <Theme appearance='dark' accentColor='plum' radius='full'>
+              <nav>
+                <NavBar />
+              </nav>
+              <main className='p-5'>
+                <Container>{children}</Container>
+              </main>
+            </Theme>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );

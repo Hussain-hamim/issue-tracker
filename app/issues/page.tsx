@@ -8,7 +8,7 @@ import { ArrowUpIcon } from '@radix-ui/react-icons';
 // import delay from 'delay';
 
 interface Props {
-  searchParams: Promise<{ status: Status; orderBy: keyof Issue }>;
+  searchParams: Promise<{ status: Status; orderBy: keyof Issue; page: string }>;
 }
 
 export default async function IssuePage({ searchParams }: Props) {

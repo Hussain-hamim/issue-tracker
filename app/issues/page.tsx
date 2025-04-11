@@ -19,21 +19,21 @@ export default async function IssuePage({ searchParams }: Props) {
   ];
 
   const orderByParams = (await searchParams).orderBy;
-  const status = (await searchParams).status;
 
-  // const statues = Object.values(Status);
-  // const status = statues.includes((await searchParams).status)
-  //   ? (await searchParams).status
-  //   : undefined;
+  const statues = Object.values(Status);
+  const status = statues.includes((await searchParams).status)
+    ? (await searchParams).status
+    : undefined;
+
+  const orderBy = columns.map((column) => column.value).includes(orderByParams)
+    ? { [orderByParams]: 'asc' }
+    : undefined;
 
   const issues = await prisma.issue.findMany({
     where: { status },
-    orderBy: {
-      // [orderByParams]: 'asc', /**TODO: fix the bug */
-    },
+    orderBy: orderBy /**TODO: fixed*/,
   });
   // await delay(2000);
-  // console.log(orderByParams);
 
   return (
     <div>

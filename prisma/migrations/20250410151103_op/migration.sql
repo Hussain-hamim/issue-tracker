@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `issue` MODIFY `status` ENUM('ALL', 'OPEN', 'IN_PROGRESS', 'CLOSED') NULL DEFAULT 'OPEN';

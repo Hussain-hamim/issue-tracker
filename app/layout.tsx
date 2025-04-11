@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={` antialiased`}>
         <QueryClientProvider>
           <AuthProvider>
-            <Theme appearance='dark' accentColor='plum' radius='full'>
+            <Theme appearance='light' accentColor='plum' radius='full'>
               <nav>
                 <NavBar />
               </nav>

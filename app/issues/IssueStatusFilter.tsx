@@ -14,12 +14,23 @@ const IssueStatusFilter = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const obj = {
+    // ...searchParams.getAll('orderBy'),
+    orderBy: searchParams.get('orderBy'),
+    status: searchParams.get('status'),
+  };
+  console.log('why', obj);
+  // const orderBy = searchParams.get('orderBy');
+
   return (
     <Select.Root
       defaultValue={searchParams.get('status') || ''}
       onValueChange={(status) => {
         const query = status === 'ALL' ? '' : `?status=${status}`;
         router.push('/issues' + query);
+        // if (orderBy) {
+        //   router.push('/issues' + query + '&' + 'orderBy=' + orderBy);
+        // }
       }}
     >
       <Select.Trigger placeholder='Filter by status...' />

@@ -1,8 +1,8 @@
-import { prisma } from '@/prisma/client';
 import { Avatar, Card, Flex, Heading, Table } from '@radix-ui/themes';
 import React from 'react';
 import { IssueStatusBadge } from './components';
 import Link from 'next/link';
+import { prisma } from '@/prisma/client';
 import { BiUser } from 'react-icons/bi';
 
 const LatestIssues = async () => {
@@ -10,7 +10,7 @@ const LatestIssues = async () => {
     orderBy: { createdAt: 'desc' },
     take: 5,
     include: {
-      assignToUser: true, // eager loading technique
+      assignToUser: true,
     },
   });
 
@@ -32,7 +32,9 @@ const LatestIssues = async () => {
                   {issue.assignToUser && (
                     <Avatar
                       src={issue.assignToUser.image!}
-                      fallback={<BiUser color='violet' />}
+                      fallback={<BiUser />}
+                      size='2'
+                      radius='full'
                     />
                   )}
                 </Flex>

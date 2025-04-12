@@ -13,7 +13,7 @@ export async function PATCH(request: NextRequest, { params }: Props) {
   if (!session) return NextResponse.json({}, { status: 401 });
 
   const body = await request.json();
-  const { assignedToUserId, title, description } = body;
+  const { assignedToUserId, title, description, status } = body;
   const validation = patchIssueSchema.safeParse(body);
 
   if (!validation.success)
@@ -43,6 +43,7 @@ export async function PATCH(request: NextRequest, { params }: Props) {
       title,
       description,
       assignedToUserId,
+      status,
     },
   });
 

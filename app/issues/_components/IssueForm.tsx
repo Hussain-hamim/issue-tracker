@@ -44,7 +44,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     } catch (error) {
       console.log(error);
       setIsSubmitting(false);
-      setError('an unexpected error occurred. Please login');
+      setError('Please login to add new issue.');
     }
   });
 
